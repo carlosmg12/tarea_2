@@ -31,12 +31,25 @@
 		<Compiler>
 			<Add option="-Wall" />
 		</Compiler>
+		<Unit filename="Map.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Map.h" />
 		<Unit filename="funciones.c">
 			<Option compilerVar="CC" />
 		</Unit>
+		<Unit filename="funciones.h" />
+		<Unit filename="lectura.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="lectura.h" />
 		<Unit filename="main.c">
 			<Option compilerVar="CC" />
 		</Unit>
+		<Unit filename="mainmap.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="mainmap.h" />
 		<Extensions>
 			<code_completion />
 			<envvars />

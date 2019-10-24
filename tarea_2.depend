@@ -1,0 +1,85 @@
+# depslib dependency file v1.0
+1569005337 source:d:\users\boyka\desktop\tareas datos\tarea_2\lista.c
+	"lista.h"
+	<stdlib.h>
+	<assert.h>
+
+1568492375 d:\users\boyka\desktop\tareas datos\tarea_2\lista.h
+
+1571260187 source:d:\users\boyka\desktop\tareas datos\tarea_2\map.c
+	"Map.h"
+	<math.h>
+	<string.h>
+	<stdlib.h>
+	<stdint.h>
+	<assert.h>
+
+1571260214 d:\users\boyka\desktop\tareas datos\tarea_2\map.h
+
+1571765253 source:d:\users\boyka\desktop\tareas datos\tarea_2\funciones.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<ctype.h>
+	"funciones.h"
+	"Map.h"
+	"lectura.h"
+
+1571689614 d:\users\boyka\desktop\tareas datos\tarea_2\funciones.h
+	"Map.h"
+
+1571260187 source:d:\users\boyka\desktop\tarea_2\map.c
+	"Map.h"
+	<math.h>
+	<string.h>
+	<stdlib.h>
+	<stdint.h>
+	<assert.h>
+
+1571260214 d:\users\boyka\desktop\tarea_2\map.h
+
+1571272269 source:d:\users\boyka\desktop\tarea_2\funciones.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<ctype.h>
+	"funciones.h"
+	"Map.h"
+
+1571500169 d:\users\boyka\desktop\tarea_2\funciones.h
+	"Map.h"
+
+1571500280 source:d:\users\boyka\desktop\tarea_2\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<ctype.h>
+	"Map.h"
+	"funciones.h"
+
+1571762618 source:d:\users\boyka\desktop\tareas datos\tarea_2\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<ctype.h>
+	"Map.h"
+	"funciones.h"
+	"mainmap.h"
+
+1571721534 source:d:\users\boyka\desktop\tareas datos\tarea_2\lectura.c
+	"lectura.h"
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+
+1571721569 d:\users\boyka\desktop\tareas datos\tarea_2\lectura.h
+
+1571762526 source:d:\users\boyka\desktop\tareas datos\tarea_2\mainmap.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<ctype.h>
+	"Map.h"
+
+1571762525 d:\users\boyka\desktop\tareas datos\tarea_2\mainmap.h
+
