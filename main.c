@@ -112,7 +112,6 @@ int main(){
             fflush(stdin);
             scanf("%[^\n]s",cancion_agregar_fecha);
             strcat(cancion_agregar,cancion_agregar_fecha);
-            printf("%s\n",cancion_agregar);
             agregar_cancion(cancion_agregar,mapa_canciones ,mapa_artistas, Mapa_album);
             mostrar();
             scanf("%d", &opcion);
