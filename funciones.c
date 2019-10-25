@@ -47,12 +47,12 @@ void mostrar(){
 }*/
 
 Cancion * crearCancion(char* linea){
-    Cancion* dato=malloc(sizeof(Cancion));
-    dato->titulo=malloc(sizeof(char));
-    dato->artista=malloc(sizeof(char));
-    dato->duracion=malloc(sizeof(char));
-    dato->album=malloc(sizeof(char));
-    dato->fecha=malloc(sizeof(char));
+    Cancion* dato=calloc(1,sizeof(Cancion));
+    dato->titulo=calloc(100,sizeof(char));
+    dato->artista=calloc(100,sizeof(char));
+    dato->duracion=calloc(100,sizeof(char));
+    dato->album=calloc(100,sizeof(char));
+    dato->fecha=calloc(100,sizeof(char));
     const char* titulo=get_csv_field (linea,1);
     const char* artista=get_csv_field (linea,2);
     const char* duracion=get_csv_field (linea,3);
@@ -63,12 +63,16 @@ Cancion * crearCancion(char* linea){
     strcpy(dato->duracion,duracion);
     strcpy(dato->album,album);
     strcpy(dato->fecha,fecha);
+    /*printf("titulo: %s\n",dato->titulo);
+    printf("artista: %s\n",dato->artista);
+    printf("duracion: %s\n",dato->duracion);
+    printf("album: %s\n",dato->album);
+    printf("fecha: %s\n",dato->fecha);*/
     return dato;
 }
 
 void cargar_datos_csv(char* archivo, Map * mapa_canciones , Map * mapa_artistas, Map * Mapa_album){
     FILE* fp=fopen(archivo,"r");
-    long canciones=0;
     char linea[1024];
     char* ptr;
     Cancion* cancion_nueva=NULL;
@@ -77,20 +81,14 @@ void cargar_datos_csv(char* archivo, Map * mapa_canciones , Map * mapa_artistas,
     Map* album=NULL;
     fgets(linea,1023,fp);
     while(fgets(linea,1023,fp)!=NULL){
-        printf("1-");
         ptr = strtok(linea,"\r");
         ptr = _strdup(ptr);
-        printf("2-");
         cancion_nueva=crearCancion(ptr);
-        printf("3-");
         cancion=searchMap(mapa_canciones,cancion_nueva->titulo);
-        printf("4-");
         if(cancion==NULL){
             insertMap(mapa_canciones,cancion_nueva->titulo,cancion_nueva);
         }
-        printf("5-");
         artista=searchMap(mapa_artistas,cancion_nueva->artista);
-        printf("6-");
         if(artista==NULL){
             artista=createMap(stringHash, stringEqual);
             insertMap(artista,cancion_nueva->titulo,cancion_nueva);
@@ -99,9 +97,7 @@ void cargar_datos_csv(char* archivo, Map * mapa_canciones , Map * mapa_artistas,
         else{
             insertMap(artista,cancion_nueva->titulo,cancion_nueva);
         }
-        printf("7-");
         album=searchMap(Mapa_album,cancion_nueva->album);
-        printf("8-");
         if(album==NULL){
             album=createMap(stringHash, stringEqual);
             insertMap(album,cancion_nueva->titulo,cancion_nueva);
@@ -110,9 +106,6 @@ void cargar_datos_csv(char* archivo, Map * mapa_canciones , Map * mapa_artistas,
         else{
             insertMap(album,cancion_nueva->titulo,cancion_nueva);
         }
-        printf("9\n");
-        canciones++;
-        printf("cantidad: %ld \nnombre: %s\nalbum: %s\n",canciones,cancion_nueva->titulo,cancion_nueva->album);
     }
     if(linea==NULL){
         printf("NULO\n");
@@ -131,6 +124,8 @@ void exportar_musica(char* archivo, Map* mapa_canciones){
         fputs(cancion->duracion,fp);
         fputc(',',fp);
         fputs(cancion->album,fp);
+        fputc(',',fp);
+        fputs(cancion->fecha,fp);
         fputc('\n',fp);
         cancion=nextMap(mapa_canciones);
     }
@@ -232,9 +227,13 @@ void eliminar_canciones_artista(char * nombre_artista,Map * mapa_canciones, Map 
 }
 
 void buscar_cancion(char * nombre_cancion, Map * mapa_canciones){
-    Cancion* cancion_buscada=NULL;
-    cancion_buscada=searchMap(mapa_canciones,nombre_cancion);
-    printf("Titulo: %s\nArtista: %s\nDuracion: %s\nAlbum: %s",cancion_buscada->titulo, cancion_buscada->artista, cancion_buscada->duracion, cancion_buscada->album);
+    Cancion* cancion_buscada=searchMap(mapa_canciones,nombre_cancion);
+    if(cancion_buscada==NULL){
+        printf("Cancion no encontrada\n");
+        return;
+    }
+    printf("\n");
+    printf("Titulo: %s\nArtista: %s\nDuracion: %s\nAlbum: %s\nFecha: %s\n",cancion_buscada->titulo, cancion_buscada->artista, cancion_buscada->duracion, cancion_buscada->album,cancion_buscada->fecha);
 }
 
 void buscar_canciones_artista(char * nombre_artista, Map * mapa_artistas){
@@ -243,10 +242,11 @@ void buscar_canciones_artista(char * nombre_artista, Map * mapa_artistas){
         printf("El artista no existe.\n");
         return;
     }
-    Cancion* cancion=firstMap(mapa_canciones_buscadas);
-    while(cancion!=NULL){
-        printf("%s %s %s %s\n", cancion->titulo, cancion->artista, cancion->duracion, cancion->album);
-        cancion = nextMap(mapa_canciones_buscadas);
+    Cancion* cancion_buscada=firstMap(mapa_canciones_buscadas);
+    printf("\n");
+    while(cancion_buscada!=NULL){
+        printf("Titulo: %s\nDuracion: %s\nAlbum: %s\nFecha: %s\n\n",cancion_buscada->titulo, cancion_buscada->duracion, cancion_buscada->album,cancion_buscada->fecha);
+        cancion_buscada = nextMap(mapa_canciones_buscadas);
     }
 }
 
@@ -256,9 +256,11 @@ void buscar_canciones_album(char * nombre_album, Map * mapa_album){
         printf("El album no existe.\n");
         return;
     }
-    Cancion* cancion=firstMap(mapa_canciones_buscadas);
-    while(cancion!=NULL){
-        printf("%s %s %s %s\n", cancion->titulo, cancion->artista, cancion->duracion, cancion->album);
-        cancion = nextMap(mapa_canciones_buscadas);
+    Cancion* cancion_buscada=firstMap(mapa_canciones_buscadas);
+    printf("\n");
+    while(cancion_buscada!=NULL){
+
+        printf("Titulo: %s\nArtista: %s\nDuracion: %s\nFecha: %s\n\n",cancion_buscada->titulo, cancion_buscada->artista, cancion_buscada->duracion,cancion_buscada->fecha);
+        cancion_buscada = nextMap(mapa_canciones_buscadas);
     }
 }

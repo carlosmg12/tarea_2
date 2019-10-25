@@ -16,7 +16,7 @@
 
 1571260214 d:\users\boyka\desktop\tareas datos\tarea_2\map.h
 
-1571765253 source:d:\users\boyka\desktop\tareas datos\tarea_2\funciones.c
+1572022420 source:d:\users\boyka\desktop\tareas datos\tarea_2\funciones.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
@@ -57,11 +57,12 @@
 	"Map.h"
 	"funciones.h"
 
-1571762618 source:d:\users\boyka\desktop\tareas datos\tarea_2\main.c
+1572023509 source:d:\users\boyka\desktop\tareas datos\tarea_2\main.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
 	<ctype.h>
+	<conio.h>
 	"Map.h"
 	"funciones.h"
 	"mainmap.h"
