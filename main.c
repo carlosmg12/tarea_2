@@ -6,31 +6,37 @@
 #include "Map.h"
 #include "funciones.h"
 #include "mainmap.h"
+#define LINEA 1024
+#define DATO 256
 
-
-int main(){
+int main()
+{
     Map * mapa_canciones=createMap(stringHash, stringEqual);
     Map * mapa_artistas=createMap(stringHash, stringEqual);
     Map * Mapa_album=createMap(stringHash, stringEqual);
     int opcion;
-    char archivo_importacion[256];
-    char archivo_exportacion[256];
-    char album_agregar[256];
-    char fecha_album[256];
-    char cancion_agregar[1024];
-    char cancion_agregar_nombre[256];
-    char cancion_agregar_artista[256];
-    char cancion_agregar_duracion[256];
-    char cancion_agregar_fecha[256];
-    char eliminar_artista[256];
-    char cancion_buscada[256];
-    char buscar_artista[256];
-    char buscar_album[256];
+    char archivo_importacion[DATO];
+    char archivo_exportacion[DATO];
+    char album_agregar[DATO];
+    char fecha_album[DATO];
+    char cancion_agregar[LINEA];
+    char cancion_agregar_nombre[DATO];
+    char cancion_agregar_artista[DATO];
+    char cancion_agregar_duracion[DATO];
+    char cancion_agregar_fecha[DATO];
+    char eliminar_artista[DATO];
+    char cancion_buscada[DATO];
+    char buscar_artista[DATO];
+    char buscar_album[DATO];
     int opcion_album;
     mostrar();
     scanf("%d", &opcion);
-    while(opcion!=0){
-        if(opcion==1){
+
+    while(opcion!=0)
+    {
+
+        if(opcion==1)
+        {
             printf("Ingrese el nombre del archivo(con su extension, ej:canciones.csv):\n");
             fflush(stdin);
             scanf("%[^\n]s",archivo_importacion);
@@ -38,8 +44,9 @@ int main(){
             mostrar();
             scanf("%d", &opcion);
         }
-        else if(opcion==2){
 
+        else if(opcion==2)
+        {
             printf("Ingrese el nombre del archivo(con su extension, ej:canciones.csv):\n");
             fflush(stdin);
             scanf("%[^\n]s",archivo_exportacion);
@@ -47,8 +54,9 @@ int main(){
             mostrar();
             scanf("%d", &opcion);
         }
-        else if(opcion==3){
 
+        else if(opcion==3)
+        {
             printf("Ingrese el nombre del album:\n");
             fflush(stdin);
             scanf("%[^\n]s",album_agregar);
@@ -56,59 +64,65 @@ int main(){
             fflush(stdin);
             scanf("%[^\n]s",fecha_album);
             agregar_album(album_agregar,Mapa_album);
-            printf("Desea agregar una cancion? No:0, Si:1\n");
+            printf("Desea agregar una cancion?(No:0, Si:1)\n");
             scanf("%d",&opcion_album);
-            while(opcion_album==1){
+
+            while(opcion_album==1)
+            {
                 printf("Ingrese los datos de la cancion:\n");
                 fflush(stdin);
-                printf("Titulo:\n");
+                printf("\nTitulo:\n");
                 fflush(stdin);
                 scanf("%[^\n]s",cancion_agregar_nombre);
                 strcpy(cancion_agregar,cancion_agregar_nombre);
                 strcat(cancion_agregar,",");
-                printf("Artista:\n");
+                printf("\nArtista:\n");
                 fflush(stdin);
                 scanf("%[^\n]s",cancion_agregar_artista);
                 strcat(cancion_agregar,cancion_agregar_artista);
                 strcat(cancion_agregar,",");
-                printf("Duracion:\n");
+                printf("\nDuracion:\n");
                 fflush(stdin);
                 scanf("%[^\n]s",cancion_agregar_duracion);
                 strcat(cancion_agregar,cancion_agregar_duracion);
                 strcat(cancion_agregar,",");
-                strcat(cancion_agregar,",");
                 strcat(cancion_agregar,album_agregar);
                 strcat(cancion_agregar,",");
-                strcat(cancion_agregar,fecha_album);
-                agregar_cancion_album(cancion_agregar, mapa_canciones , mapa_artistas, Mapa_album);
-                printf("Desea seguir agregando canciones? No:0, Si:1\n");
+                printf("\nFecha:\n");
+                fflush(stdin);
+                scanf("%[^\n]s",cancion_agregar_fecha);
+                strcat(cancion_agregar,cancion_agregar_fecha);
+                agregar_cancion(cancion_agregar, mapa_canciones , mapa_artistas, Mapa_album);
+                printf("\nDesea seguir agregando canciones? No:0, Si:1\n");
                 scanf("%d",&opcion_album);
             }
+
             mostrar();
             scanf("%d", &opcion);
         }
-        else if(opcion==4){
 
+        else if(opcion==4)
+        {
             printf("Ingrese los datos de la cancion:\n");
-            printf("Titulo:\n");
+            printf("\nTitulo:\n");
             fflush(stdin);
             fflush(stdin);
             scanf("%[^\n]s",cancion_agregar_nombre);
             strcpy(cancion_agregar,cancion_agregar_nombre);
             strcat(cancion_agregar,",");
-            printf("Artista:\n");
+            printf("\nArtista:\n");
             fflush(stdin);
             scanf("%[^\n]s",cancion_agregar_artista);
             strcat(cancion_agregar,cancion_agregar_artista);
             strcat(cancion_agregar,",");
-            printf("Duracion:\n");
+            printf("\nDuracion:\n");
             fflush(stdin);
             scanf("%[^\n]s",cancion_agregar_duracion);
             strcat(cancion_agregar,cancion_agregar_duracion);
             strcat(cancion_agregar,",");
             strcat(cancion_agregar,"-");
             strcat(cancion_agregar,",");
-            printf("Fecha:\n");
+            printf("\nFecha:\n");
             fflush(stdin);
             scanf("%[^\n]s",cancion_agregar_fecha);
             strcat(cancion_agregar,cancion_agregar_fecha);
@@ -116,8 +130,9 @@ int main(){
             mostrar();
             scanf("%d", &opcion);
         }
-        else if(opcion==5){
 
+        else if(opcion==5)
+        {
             printf("Ingrese el nombre del artista:\n");
             fflush(stdin);
             scanf("%[^\n]s",eliminar_artista);
@@ -125,8 +140,9 @@ int main(){
             mostrar();
             scanf("%d", &opcion);
         }
-        else if(opcion==6){
 
+        else if(opcion==6)
+        {
             printf("Ingrese el titulo de la cancion(respete mayusculas):\n");
             fflush(stdin);
             scanf("%[^\n]s",cancion_buscada);
@@ -134,8 +150,9 @@ int main(){
             mostrar();
             scanf("%d", &opcion);
         }
-        else if(opcion==7){
 
+        else if(opcion==7)
+        {
             printf("Ingrese el nombre del artista:\n");
             fflush(stdin);
             scanf("%[^\n]s",buscar_artista);
@@ -143,8 +160,9 @@ int main(){
             mostrar();
             scanf("%d", &opcion);
         }
-        else if(opcion==8){
 
+        else if(opcion==8)
+        {
             printf("Ingrese el nombre del album:\n");
             fflush(stdin);
             scanf("%[^\n]s",buscar_album);
@@ -152,6 +170,7 @@ int main(){
             mostrar();
             scanf("%d", &opcion);
         }
+
     }
 
     return 0;

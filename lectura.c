@@ -3,25 +3,36 @@
 #include <stdlib.h>
 #include <string.h>
 
-char * _strdup (const char *s) {
+/*funciones para leer las lineas del archivo .csv*/
+
+char * _strdup (const char *s)
+{
 	size_t len = strlen (s) + 1;
     void *new = malloc (len);
 
 	if (new == NULL)
+    {
 	    return NULL;
+	}
 
 	return (char *) memcpy (new, s, len);
 }
 
-const char *get_csv_field (char * tmp, int i) {
+const char *get_csv_field (char * tmp, int i)
+{
     //se crea una copia del string tmp
     char * line = _strdup (tmp);
     const char * tok;
-    for (tok = strtok (line, ","); tok && *tok; tok = strtok (NULL, ",\n")) {
-        if (!--i) {
+    for (tok = strtok (line, ","); tok && *tok; tok = strtok (NULL, ",\n"))
+    {
+
+        if (!--i)
+        {
             return tok;
         }
+
     }
+
     return NULL;
 }
 
